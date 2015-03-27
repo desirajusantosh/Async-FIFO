@@ -13,8 +13,13 @@ always@(posedge clk, negedge reset_b)
 begin
   if(~reset_b)
     begin
-    for(i = 0; i<DEPTH -1; i++)
+    for(i = 0; i<DEPTH; i = i + 1)
       mem[i] <= 'h0;
     end
   else if(write & ~wfull)
-    
+    mem[waddr] = wdata;
+  end
+
+assign rdata = mem[raddr];
+
+endmodule
